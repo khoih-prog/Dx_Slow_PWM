@@ -12,11 +12,12 @@
   Therefore, their executions are not blocked by bad-behaving functions / tasks.
   This important feature is absolutely necessary for mission-critical tasks.
 
-  Version: 1.0.0
+  Version: 1.0.1
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0   K.Hoang      25/08/2022 Initial coding to support AVR Dx (AVR128Dx, AVR64Dx, AVR32Dx, etc.) using DxCore
+  1.0.1   K.Hoang      25/08/2022 Make MAX_NUMBER_CHANNELS configurable to max 64 PWM channels
 ****************************************************************************************************************************/
 
 #pragma once
@@ -165,21 +166,10 @@ void TimerInterrupt::init(const int8_t& timer)
   TimerTCB[timer]->CCMP     = MAX_COUNT_16BIT;                            // Value to compare with.
   TimerTCB[timer]->INTCTRL  &= ~TCB_CAPT_bm;                              // Disable the interrupt
   TimerTCB[timer]->CTRLA    = TCB_CLKSEL_VALUE | TCB_ENABLE_bm;           // Use Timer A as clock, enable timer
-
-  PWM_LOGWARN1(F("TCB"), timer);
-  
-  PWM_LOGINFO(F("=================="));
-  PWM_LOGINFO1(F("Init, Timer = "), timer);
-  PWM_LOGINFO1(F("CTRLB   = "), TimerTCB[timer]->CTRLB);
-  PWM_LOGINFO1(F("CCMP    = "), TimerTCB[timer]->CCMP);
-  PWM_LOGINFO1(F("INTCTRL = "), TimerTCB[timer]->INTCTRL);
-  PWM_LOGINFO1(F("CTRLA   = "), TimerTCB[timer]->CTRLA);
-  PWM_LOGINFO(F("=================="));
    
   _timer = timer;
 
-  interrupts();
-  
+  interrupts();  
 }
 
 //////////////////////////////////////////////
@@ -198,15 +188,7 @@ void TimerInterrupt::set_CCMP()
   TimerTCB[_timer]->CCMP    = _CCMPValueToUse;    // Value to compare with.
   
   TimerTCB[_timer]->INTCTRL = TCB_CAPT_bm; // Enable the interrupt
-  
-  PWM_LOGDEBUG(F("=================="));
-  PWM_LOGDEBUG1(F("set_CCMP, Timer = "), _timer);
-  PWM_LOGDEBUG1(F("CTRLB   = "), TimerTCB[_timer]->CTRLB);
-  PWM_LOGDEBUG1(F("CCMP    = "), TimerTCB[_timer]->CCMP);
-  PWM_LOGDEBUG1(F("INTCTRL = "), TimerTCB[_timer]->INTCTRL);
-  PWM_LOGDEBUG1(F("CTRLA   = "), TimerTCB[_timer]->CTRLA);
-  PWM_LOGDEBUG(F("=================="));
-  
+ 
   // Flag _CCMPValue == 0 => end of long timer
   if (_CCMPValueRemaining == 0)
     _timerDone = true;
@@ -224,9 +206,7 @@ bool TimerInterrupt::setFrequency(const float& frequency, timer_callback_p callb
 
   // Limit frequency to larger than (0.00372529 / 64) Hz or interval 17179.840s / 17179840 ms to avoid uint32_t overflow
   if ((_timer <= 0) || (callback == NULL) || ((frequencyLimit) < 1) )
-  {
-    PWM_LOGDEBUG(F("setFrequency error"));
-    
+  {    
     return false;
   }
   else      
@@ -235,14 +215,9 @@ bool TimerInterrupt::setFrequency(const float& frequency, timer_callback_p callb
     if (duration > 0)
     {   
       _toggle_count = frequency * duration / 1000;
-
-      PWM_LOGINFO1(F("setFrequency => _toggle_count = "), _toggle_count);
-      PWM_LOGINFO3(F("Frequency ="), frequency, F(", duration = "), duration);
-           
+          
       if (_toggle_count < 1)
-      {
-        PWM_LOGDEBUG(F("setFrequency: _toggle_count < 1 error"));
-        
+      {        
         return false;
       }
     }
@@ -262,10 +237,7 @@ bool TimerInterrupt::setFrequency(const float& frequency, timer_callback_p callb
     _timerDone = false;
     
     _CCMPValue = _CCMPValueRemaining = (uint32_t) (CLK_TCB_FREQ / frequency);
-
-    PWM_LOGINFO3(F("Frequency = "), frequency, F(", CLK_TCB_FREQ = "), CLK_TCB_FREQ);
-    PWM_LOGINFO1(F("setFrequency: _CCMPValueRemaining = "), _CCMPValueRemaining);
-                
+               
     // Set the CCMP for the given timer,
     // set the toggle count,
     // then turn on the interrupts     
@@ -378,9 +350,7 @@ void TimerInterrupt::resumeTimer()
         if (countLocal != 0)
         {
           if (ITimer0.checkTimerDone())
-          {  
-            PWM_LOGDEBUG3(F("T0 callback, _CCMPValueRemaining = "), ITimer0.get_CCMPValueRemaining(), F(", millis = "), millis());
-            
+          {              
             ITimer0.callback();
             
             if (ITimer0.get_CCMPValue() > MAX_COUNT_16BIT)            
@@ -401,9 +371,7 @@ void TimerInterrupt::resumeTimer()
           }
         }
         else
-        {
-          PWM_LOGWARN(F("T0 done"));
-          
+        {          
           ITimer0.detachInterrupt();
         }
       }
@@ -434,9 +402,7 @@ void TimerInterrupt::resumeTimer()
       if (countLocal != 0)
       {
         if (ITimer1.checkTimerDone())
-        {
-          PWM_LOGDEBUG3(F("T1 callback, _CCMPValueRemaining = "), ITimer1.get_CCMPValueRemaining(), F(", millis = "), millis());
-          
+        {          
           ITimer1.callback();
           
           if (ITimer1.get_CCMPValue() > MAX_COUNT_16BIT)
@@ -457,9 +423,7 @@ void TimerInterrupt::resumeTimer()
         }         
       }
       else
-      {
-        PWM_LOGWARN(F("T1 done"));
-        
+      {        
         ITimer1.detachInterrupt();
       }
     }
@@ -488,9 +452,7 @@ void TimerInterrupt::resumeTimer()
       if (countLocal != 0)
       {
         if (ITimer2.checkTimerDone())
-        {
-          PWM_LOGDEBUG3(F("T2 callback, _CCMPValueRemaining = "), ITimer2.get_CCMPValueRemaining(), F(", millis = "), millis());
-           
+        {           
           ITimer2.callback();
           
           if (ITimer2.get_CCMPValue() > MAX_COUNT_16BIT)
@@ -511,9 +473,7 @@ void TimerInterrupt::resumeTimer()
         }          
       }    
       else
-      {
-        PWM_LOGWARN(F("T2 done"));
-        
+      {        
         ITimer2.detachInterrupt();
       }
     }
@@ -542,9 +502,7 @@ void TimerInterrupt::resumeTimer()
         if (countLocal != 0)
         {
           if (ITimer3.checkTimerDone())
-          { 
-            PWM_LOGDEBUG3(F("T3 callback, _CCMPValueRemaining = "), ITimer3.get_CCMPValueRemaining(), F(", millis = "), millis());
-            
+          {             
             ITimer3.callback();
             
             if (ITimer3.get_CCMPValue() > MAX_COUNT_16BIT)
@@ -565,9 +523,7 @@ void TimerInterrupt::resumeTimer()
           }
         }
         else
-        {
-          PWM_LOGWARN(F("T3 done"));
-          
+        {          
           ITimer3.detachInterrupt();
         }
       }
@@ -597,9 +553,7 @@ void TimerInterrupt::resumeTimer()
         if (countLocal != 0)
         {
           if (ITimer4.checkTimerDone())
-          { 
-            PWM_LOGDEBUG3(F("T4 callback, _CCMPValueRemaining = "), ITimer4.get_CCMPValueRemaining(), F(", millis = "), millis());
-            
+          {            
             ITimer4.callback();
             
             if (ITimer4.get_CCMPValue() > MAX_COUNT_16BIT)
@@ -620,9 +574,7 @@ void TimerInterrupt::resumeTimer()
           }
         }
         else
-        {
-          PWM_LOGWARN(F("T4 done"));
-          
+        {          
           ITimer4.detachInterrupt();
         }
       }

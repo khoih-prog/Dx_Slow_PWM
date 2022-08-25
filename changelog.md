@@ -10,6 +10,7 @@
 
 * [Changelog](#changelog)
 
+  * [Release v1.0.1](#release-v101)
   * [Initial Release v1.0.0](#initial-release-v100)
 
 ---
@@ -17,6 +18,12 @@
 
 ## Changelog
 
+
+### Release v1.0.1
+
+1. Make `MAX_NUMBER_CHANNELS` configurable to max **64 PWM channels**
+2. Remove debug codes possibly causing hang
+3. Improve debug to use `Serialx` port automatically according to boards
 
 ### Initial Release v1.0.0
 

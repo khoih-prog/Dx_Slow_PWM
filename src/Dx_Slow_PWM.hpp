@@ -12,11 +12,12 @@
   Therefore, their executions are not blocked by bad-behaving functions / tasks.
   This important feature is absolutely necessary for mission-critical tasks.
 
-  Version: 1.0.0
+  Version: 1.0.1
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0   K.Hoang      25/08/2022 Initial coding to support AVR Dx (AVR128Dx, AVR64Dx, AVR32Dx, etc.) using DxCore
+  1.0.1   K.Hoang      25/08/2022 Make MAX_NUMBER_CHANNELS configurable to max 64 PWM channels
 *****************************************************************************************************************************/
 
 #pragma once
@@ -103,13 +104,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef DX_SLOW_PWM_VERSION
-  #define DX_SLOW_PWM_VERSION           F("Dx_Slow_PWM v1.0.0")
+  #define DX_SLOW_PWM_VERSION           F("Dx_Slow_PWM v1.0.1")
   
   #define DX_SLOW_PWM_VERSION_MAJOR     1
   #define DX_SLOW_PWM_VERSION_MINOR     0
-  #define DX_SLOW_PWM_VERSION_PATCH     0
+  #define DX_SLOW_PWM_VERSION_PATCH     1
 
-  #define DX_SLOW_PWM_VERSION_INT       1000000
+  #define DX_SLOW_PWM_VERSION_INT       1000001
 #endif
 
 #ifndef _PWM_LOGLEVEL_

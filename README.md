@@ -117,21 +117,21 @@ After drag-and-drop the `Change_Interval.ino.hex` into `CURIOSITY` virtual drive
 
 ### Features
 
-This library enables you to use ISR-based PWM channels on Arduino AVRDx-based boards (AVR128Dx, AVR64Dx, AVR32Dx, etc.), using [DxCore](https://github.com/SpenceKonde/DxCore), to create and output PWM any GPIO pin. Because this library doesn't use the powerful purely hardware-controlled PWM with many limitations, the maximum PWM frequency is currently limited at **500Hz**, which is still suitable for many real-life applications. Now you can change the PWM settings on-the-fly
+This library enables you to use ISR-based PWM channels on Arduino AVRDx-based boards (AVR128Dx, AVR64Dx, AVR32Dx, etc.), using [DxCore](https://github.com/SpenceKonde/DxCore), to create and output PWM any GPIO pin. Because this library doesn't use the powerful purely hardware-controlled PWM with many limitations, the maximum PWM frequency is currently limited at **1000Hz**, which is still suitable for many real-life applications. Now you can change the PWM settings on-the-fly
 
 ---
 
-This library enables you to use Interrupt from Hardware Timers on AVRDx-based boards to create and output PWM to pins. It now supports 16 ISR-based synchronized PWM channels, while consuming only 1 Hardware Timer. PWM interval can be very long (uint64_t microsecs / millisecs). The most important feature is they're ISR-based PWM channels. Therefore, their executions are not blocked by bad-behaving functions or tasks. This important feature is absolutely necessary for mission-critical tasks. These hardware PWM channels, using interrupt, still work even if other functions are blocking. Moreover, they are much more precise (certainly depending on clock frequency accuracy) than other software PWM using millis() or micros(). That's necessary if you need to measure some data requiring better accuracy.
+This library enables you to use Interrupt from Hardware Timers on AVRDx-based boards to create and output PWM to pins. It now supports 64 ISR-based synchronized PWM channels, while consuming only 1 Hardware Timer. PWM interval can be very long (uint64_t microsecs / millisecs). The most important feature is they're ISR-based PWM channels. Therefore, their executions are not blocked by bad-behaving functions or tasks. This important feature is absolutely necessary for mission-critical tasks. These hardware PWM channels, using interrupt, still work even if other functions are blocking. Moreover, they are much more precise (certainly depending on clock frequency accuracy) than other software PWM using millis() or micros(). That's necessary if you need to measure some data requiring better accuracy.
 
-As **Hardware Timers are rare, and very precious assets** of any board, this library now enables you to use up to **16 ISR-based synchronized PWM channels, while consuming only 1 Hardware Timer**. Timers' interval is very long (**ulong millisecs**).
+As **Hardware Timers are rare, and very precious assets** of any board, this library now enables you to use up to **64 ISR-based synchronized PWM channels, while consuming only 1 Hardware Timer**. Timers' interval is very long (**ulong millisecs**).
 
-Now with these new **16 ISR-based PWM-channels**, the maximum interval is **practically unlimited** (limited only by unsigned long miliseconds) while **the accuracy is nearly perfect** compared to software PWM channels. 
+Now with these new **64 ISR-based PWM-channels**, the maximum interval is **practically unlimited** (limited only by unsigned long miliseconds) while **the accuracy is nearly perfect** compared to software PWM channels. 
 
 The most important feature is they're ISR-based PWM channels. Therefore, their executions are **not blocked by bad-behaving functions / tasks**. This important feature is absolutely necessary for mission-critical tasks. 
 
 The [**ISR_8_PWMs_Array_Complex**](examples/ISR_8_PWMs_Array_Complex) example will demonstrate the nearly perfect accuracy, compared to software PWM, by printing the actual period / duty-cycle in `microsecs` of each of PWM-channels.
 
-Being ISR-based PWM, their executions are not blocked by bad-behaving functions / tasks, such as connecting to WiFi, Internet or Blynk services. You can also have many `(up to 16)` PWM channels to use.
+Being ISR-based PWM, their executions are not blocked by bad-behaving functions / tasks, such as connecting to WiFi, Internet or Blynk services. You can also have many `(up to 64)` PWM channels to use.
 
 This non-being-blocked important feature is absolutely necessary for mission-critical tasks.
 
@@ -206,7 +206,7 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
 2. [`SpenceKonde DxCore core 1.4.10+`](https://github.com/SpenceKonde/DxCore) for Arduino AVRDx boards.  [![GitHub release](https://img.shields.io/github/release/SpenceKonde/DxCore.svg)](https://github.com/SpenceKonde/DxCore/releases/latest). Follow [**DxCore Installation**](https://github.com/SpenceKonde/DxCore/blob/main/Installation.md).
 3. To use with certain example
-   - [`SimpleTimer library`](https://github.com/jfturcot/SimpleTimer) for [ISR_Timers_Array_Simple](examples/ISR_Timers_Array_Simple) and [ISR_16_Timers_Array_Complex](examples/ISR_16_Timers_Array_Complex) examples.
+   - [`SimpleTimer library`](https://github.com/jfturcot/SimpleTimer) for [ISR_8_PWMs_Array_Simple](examples/ISR_8_PWMs_Array_Simple) and [ISR_8_PWMs_Array_Complex](examples/ISR_8_PWMs_Array_Complex) examples.
    
    
 ---
@@ -328,7 +328,7 @@ Before using any Timer, you have to make sure the Timer has not been used by any
   #error You must select one Timer  
 #endif
 
-// Init Dx_Slow_PWM, each can service 16 different ISR-based PWM channels
+// Init Dx_Slow_PWM, each can service 64 different ISR-based PWM channels
 Dx_Slow_PWM ISR_PWM;
 ```
 
@@ -389,7 +389,7 @@ The following is the sample terminal output when running example [ISR_8_PWMs_Arr
 
 ```
 Starting ISR_8_PWMs_Array_Complex on AVR128DB
-Dx_Slow_PWM v1.0.0
+Dx_Slow_PWM v1.0.1
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 13691
@@ -431,7 +431,7 @@ The following is the sample terminal output when running example [**ISR_8_PWMs_A
 
 ```
 Starting ISR_8_PWMs_Array on AVR128DB
-Dx_Slow_PWM v1.0.0
+Dx_Slow_PWM v1.0.1
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 12894
@@ -445,7 +445,7 @@ The following is the sample terminal output when running example [**ISR_8_PWMs_A
 
 ```
 Starting ISR_8_PWMs_Array_Simple on AVR128DB
-Dx_Slow_PWM v1.0.0
+Dx_Slow_PWM v1.0.1
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 14169
@@ -459,7 +459,7 @@ The following is the sample terminal output when running example [ISR_Modify_PWM
 
 ```
 Starting ISR_Modify_PWM on AVR128DB
-Dx_Slow_PWM v1.0.0
+Dx_Slow_PWM v1.0.1
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 12823
@@ -474,7 +474,7 @@ The following is the sample terminal output when running example [ISR_Changing_P
 
 ```
 Starting ISR_Changing_PWM on AVR128DB
-Dx_Slow_PWM v1.0.0
+Dx_Slow_PWM v1.0.1
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 12998
@@ -526,14 +526,18 @@ Submit issues to: [Dx_Slow_PWM issues](https://github.com/khoih-prog/Dx_Slow_PWM
 
 ## DONE
 
-1. Basic hardware multi-channel PWM for **AVRDx-based boards (AVR128Dx, AVR64Dx, AVR32Dx, etc.) using DxCore**
-2. Add Table of Contents
-3. Add functions to modify PWM settings on-the-fly
-4. Fix `multiple-definitions` linker error
-5. Optimize library code by using `reference-passing` instead of `value-passing`
-6. Improve accuracy by using `float`, instead of `uint32_t` for `dutycycle`
-7. DutyCycle to be optionally updated at the end current PWM period instead of immediately.
-8. Display informational warning only when `_PWM_LOGLEVEL_` > 3
+ 1. Basic hardware multi-channel PWM for **AVRDx-based boards (AVR128Dx, AVR64Dx, AVR32Dx, etc.) using DxCore**
+ 2. Add Table of Contents
+ 3. Add functions to modify PWM settings on-the-fly
+ 4. Fix `multiple-definitions` linker error
+ 5. Optimize library code by using `reference-passing` instead of `value-passing`
+ 6. Improve accuracy by using `float`, instead of `uint32_t` for `dutycycle`
+ 7. DutyCycle to be optionally updated at the end current PWM period instead of immediately.
+ 8. Display informational warning only when `_PWM_LOGLEVEL_` > 3
+ 9 Make `MAX_NUMBER_CHANNELS` configurable to max **64 PWM channels**
+10. Remove debug codes possibly causing hang
+11. Improve debug to use `Serialx` port automatically according to boards.
+
 
 ---
 ---
@@ -543,7 +547,12 @@ Submit issues to: [Dx_Slow_PWM issues](https://github.com/khoih-prog/Dx_Slow_PWM
 Many thanks for everyone for bug reporting, new feature suggesting, testing and contributing to the development of this library. Especially to these people who have directly or indirectly contributed to this [Dx_TimerInterrupt library](https://github.com/khoih-prog/Dx_TimerInterrupt)
 
 1. Thanks to good work of [Spence Konde (aka Dr. Azzy)](https://github.com/SpenceKonde) for the [DxCore](https://github.com/SpenceKonde/DxCore) and [megaTinyCore](https://github.com/SpenceKonde/megaTinyCore)
-2. Thanks to [LaurentR59](https://github.com/LaurentR59) to request the enhancement [Support for DX CORE CPU and MightyCORE CPU possible? #8](https://github.com/khoih-prog/TimerInterrupt_Generic/issues/8) leading to this new library
+2. Thanks to [LaurentR59](https://github.com/LaurentR59) to request 
+
+- the enhancement [Support for DX CORE CPU and MightyCORE CPU possible? #8](https://github.com/khoih-prog/TimerInterrupt_Generic/issues/8) leading to this new library
+- the enhancement [PWM to drive over 16 channels #1](https://github.com/khoih-prog/Dx_Slow_PWM/issues/1) leading to new v1.0.1
+
+
 
 <table>
   <tr>

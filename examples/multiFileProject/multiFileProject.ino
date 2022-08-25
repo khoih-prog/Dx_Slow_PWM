@@ -15,22 +15,13 @@
   #error This is designed only for DXCORE or MEGATINYCORE megaAVR board! Please check your Tools->Board setting
 #endif
 
-#define DX_SLOW_PWM_VERSION_MIN_TARGET      F("Dx_Slow_PWM v1.0.0")
-#define DX_SLOW_PWM_VERSION_MIN             1000000
+#define DX_SLOW_PWM_VERSION_MIN_TARGET      F("Dx_Slow_PWM v1.0.1")
+#define DX_SLOW_PWM_VERSION_MIN             1000001
 
 #include "multiFileProject.h"
 
 // To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
 #include "Dx_Slow_PWM.h"
-
-#if defined(__AVR_AVR128DA48__) 
-  #define SerialDebug   Serial1
-#elif defined(__AVR_AVR128DB48__) 
-  #define SerialDebug   Serial3
-#else
-  // standard Serial
-  #define SerialDebug   Serial
-#endif
 
 void setup() 
 {

@@ -23,7 +23,21 @@
 // These define's must be placed at the beginning before #include "megaAVR_Slow_PWM.h"
 // _PWM_LOGLEVEL_ from 0 to 4
 // Don't define _PWM_LOGLEVEL_ > 0. Only for special ISR debugging only. Can hang the system.
-#define _PWM_LOGLEVEL_      3
+#define _PWM_LOGLEVEL_      1
+
+#if defined(__AVR_AVR128DA48__) 
+  #define SerialDebug   Serial1
+#elif defined(__AVR_AVR128DB48__) 
+  #define SerialDebug   Serial3
+#else
+  // standard Serial
+  #define SerialDebug   Serial
+#endif
+
+#define PWM_GENERIC_DEBUG_PORT    SerialDebug
+
+// Be careful when using MAX_NUMBER_CHANNELS > 16. Max pemissible MAX_NUMBER_CHANNELS is 64
+#define MAX_NUMBER_CHANNELS        16
 
 // Select USING_FULL_CLOCK      == true for  24/16MHz to Timer TCBx => shorter timer, but better accuracy
 // Select USING_HALF_CLOCK      == true for  12/ 8MHz to Timer TCBx => shorter timer, but better accuracy
@@ -96,7 +110,7 @@
 
 volatile uint32_t startMicros = 0;
 
-// Init DX_SLOW_PWM, each can service 16 different ISR-based PWM channels
+// Init DX_SLOW_PWM, each can service max 48 different ISR-based PWM channels
 DX_SLOW_PWM_ISR ISR_PWM;
 
 //////////////////////////////////////////////////////
@@ -415,6 +429,7 @@ void setup()
   SerialDebug.print(F("\nStarting ISR_8_PWMs_Array_Complex on ")); SerialDebug.println(BOARD_NAME);
   SerialDebug.println(DX_SLOW_PWM_VERSION);
   SerialDebug.print(F("CPU Frequency = ")); SerialDebug.print(F_CPU / 1000000); SerialDebug.println(F(" MHz"));
+  SerialDebug.print(F("Max number PWM channels = ")); SerialDebug.println(MAX_NUMBER_CHANNELS);
 
   SerialDebug.print(F("TCB Clock Frequency = ")); 
 
