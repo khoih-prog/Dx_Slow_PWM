@@ -374,7 +374,7 @@ void setup()
 
 ### Example [ISR_8_PWMs_Array_Complex](examples/ISR_8_PWMs_Array_Complex)
 
-https://github.com/khoih-prog/Dx_Slow_PWM/blob/101fff1255ed660cc1f038ce81fe7e3cb1d2b48e/examples/ISR_8_PWMs_Array_Complex/ISR_8_PWMs_Array_Complex.ino#L16-L497
+https://github.com/khoih-prog/Dx_Slow_PWM/blob/c67b7f2fc34fc176788b283e72d4860edadd97d3/examples/ISR_8_PWMs_Array_Complex/ISR_8_PWMs_Array_Complex.ino#L16-L512
 
 
 ---

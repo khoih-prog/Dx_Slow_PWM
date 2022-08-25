@@ -130,22 +130,22 @@ typedef enum TCB_CNTMODE_enum
 // No TCB_CLKSEL_CLKTCA_gc in DXCore ???
 // Don't use 250KHz now
 #elif USING_250KHZ
-		// Optional, but for clarity
-		// Use Timer A as clock (prescaler 64) => 250KHz
-		#define TCB_CLKSEL_VALUE      TCB_CLKSEL_CLKTCA_gc 
-		#define CLOCK_PRESCALER       64
-		
-		#error Not OK now. Do not use
-		
+    // Optional, but for clarity
+    // Use Timer A as clock (prescaler 64) => 250KHz
+    #define TCB_CLKSEL_VALUE      TCB_CLKSEL_CLKTCA_gc 
+    #define CLOCK_PRESCALER       64
+    
+    #error Not OK now. Do not use
+    
 #else
-	// Use prescaler 2 => 8MHz
-	#if (_PWM_LOGLEVEL_ > 2)
-	  #warning Using prescaler 2 => 8MHz
-	#endif
-	
-	#define TCB_CLKSEL_VALUE      TCB_CLKSEL_DIV2_gc
-	#define CLOCK_PRESCALER       2
-	
+  // Use prescaler 2 => 8MHz
+  #if (_PWM_LOGLEVEL_ > 2)
+    #warning Using prescaler 2 => 8MHz
+  #endif
+  
+  #define TCB_CLKSEL_VALUE      TCB_CLKSEL_DIV2_gc
+  #define CLOCK_PRESCALER       2
+  
 #endif
   
 #define CLK_TCB_FREQ          ( F_CPU / CLOCK_PRESCALER )
@@ -583,7 +583,7 @@ void TimerInterrupt::resumeTimer()
       TCB4.INTFLAGS = TCB_CAPT_bm;
     }  
     
-  #endif  //#ifndef TIMER3_INSTANTIATED
-#endif    //#if USE_TIMER_3
+  #endif  //#ifndef TIMER4_INSTANTIATED
+#endif    //#if USE_TIMER_4
 
 #endif // DX_SLOW_PWM_IMPL_H

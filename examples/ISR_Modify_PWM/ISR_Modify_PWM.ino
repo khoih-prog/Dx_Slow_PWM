@@ -23,7 +23,9 @@
 // These define's must be placed at the beginning before #include "megaAVR_Slow_PWM.h"
 // _PWM_LOGLEVEL_ from 0 to 4
 // Don't define _PWM_LOGLEVEL_ > 0. Only for special ISR debugging only. Can hang the system.
-#define _PWM_LOGLEVEL_      1#if defined(__AVR_AVR128DA48__) 
+#define _PWM_LOGLEVEL_      1
+
+#if defined(__AVR_AVR128DA48__) 
   #define SerialDebug   Serial1
 #elif defined(__AVR_AVR128DB48__) 
   #define SerialDebug   Serial3

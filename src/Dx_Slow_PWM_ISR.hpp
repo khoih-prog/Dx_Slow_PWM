@@ -156,16 +156,16 @@ typedef void (*timer_callback_p)(void *);
 #define INVALID_MEGA_AVR_PIN         255
 
 #if !defined(MAX_NUMBER_CHANNELS)
-	// maximum number of PWM channels
-	#define MAX_NUMBER_CHANNELS        16
+  // maximum number of PWM channels
+  #define MAX_NUMBER_CHANNELS        16
 #else
-	#if (MAX_NUMBER_CHANNELS > 64)
-		#undef MAX_NUMBER_CHANNELS
-		#define MAX_NUMBER_CHANNELS        64
-		
-		#warning Reset too big MAX_NUMBER_CHANNELS to 64
-	#endif
-#endif	
+  #if (MAX_NUMBER_CHANNELS > 64)
+    #undef MAX_NUMBER_CHANNELS
+    #define MAX_NUMBER_CHANNELS        64
+    
+    #warning Reset too big MAX_NUMBER_CHANNELS to 64
+  #endif
+#endif  
 
 //////////////////////////////////////////////////////////////////
 
@@ -200,7 +200,7 @@ class DX_SLOW_PWM_ISR
         period = (uint32_t) (1000.0f / frequency);
 #endif
         PWM_LOGDEBUG1(F("Frequency = "), frequency);
-			
+      
       }
       else
       {       
