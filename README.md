@@ -374,7 +374,7 @@ void setup()
 
 ### Example [ISR_8_PWMs_Array_Complex](examples/ISR_8_PWMs_Array_Complex)
 
-https://github.com/khoih-prog/Dx_Slow_PWM/blob/c67b7f2fc34fc176788b283e72d4860edadd97d3/examples/ISR_8_PWMs_Array_Complex/ISR_8_PWMs_Array_Complex.ino#L16-L512
+https://github.com/khoih-prog/Dx_Slow_PWM/blob/a4f6824724484cd522fc9c98fac4cd5c6a373ee4/examples/ISR_8_PWMs_Array_Complex/ISR_8_PWMs_Array_Complex.ino#L16-L512
 
 
 ---
@@ -389,7 +389,7 @@ The following is the sample terminal output when running example [ISR_8_PWMs_Arr
 
 ```
 Starting ISR_8_PWMs_Array_Complex on AVR128DB
-Dx_Slow_PWM v1.0.1
+Dx_Slow_PWM v1.0.2
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 13691
@@ -431,7 +431,7 @@ The following is the sample terminal output when running example [**ISR_8_PWMs_A
 
 ```
 Starting ISR_8_PWMs_Array on AVR128DB
-Dx_Slow_PWM v1.0.1
+Dx_Slow_PWM v1.0.2
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 12894
@@ -445,7 +445,7 @@ The following is the sample terminal output when running example [**ISR_8_PWMs_A
 
 ```
 Starting ISR_8_PWMs_Array_Simple on AVR128DB
-Dx_Slow_PWM v1.0.1
+Dx_Slow_PWM v1.0.2
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 14169
@@ -459,7 +459,7 @@ The following is the sample terminal output when running example [ISR_Modify_PWM
 
 ```
 Starting ISR_Modify_PWM on AVR128DB
-Dx_Slow_PWM v1.0.1
+Dx_Slow_PWM v1.0.2
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 12823
@@ -474,7 +474,7 @@ The following is the sample terminal output when running example [ISR_Changing_P
 
 ```
 Starting ISR_Changing_PWM on AVR128DB
-Dx_Slow_PWM v1.0.1
+Dx_Slow_PWM v1.0.2
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 12998
