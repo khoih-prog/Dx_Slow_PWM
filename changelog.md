@@ -10,6 +10,7 @@
 
 * [Changelog](#changelog)
 
+  * [Release v1.0.2](#release-v102)
   * [Release v1.0.1](#release-v101)
   * [Initial Release v1.0.0](#initial-release-v100)
 
@@ -18,6 +19,10 @@
 
 ## Changelog
 
+
+### Release v1.0.2
+
+1. Minor cosmetic fix
 
 ### Release v1.0.1
 
