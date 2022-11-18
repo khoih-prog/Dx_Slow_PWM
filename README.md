@@ -102,7 +102,7 @@ For example, to run [Change_Interval example](https://github.com/khoih-prog/Dx_T
 </p>
 
 
-After drag-and-drop the `Change_Interval.ino.hex` into `CURIOSITY` virtual drive, the code will run immidiately if successfully loaded (LED blinks **slowly**)
+After drag-and-drop the `Change_Interval.ino.hex` into `CURIOSITY` virtual drive, the code will run immediately if successfully loaded (LED blinks **slowly**)
 
 
 <p align="center">
@@ -125,7 +125,7 @@ This library enables you to use Interrupt from Hardware Timers on AVRDx-based bo
 
 As **Hardware Timers are rare, and very precious assets** of any board, this library now enables you to use up to **64 ISR-based synchronized PWM channels, while consuming only 1 Hardware Timer**. Timers' interval is very long (**ulong millisecs**).
 
-Now with these new **64 ISR-based PWM-channels**, the maximum interval is **practically unlimited** (limited only by unsigned long miliseconds) while **the accuracy is nearly perfect** compared to software PWM channels. 
+Now with these new **64 ISR-based PWM-channels**, the maximum interval is **practically unlimited** (limited only by unsigned long milliseconds) while **the accuracy is nearly perfect** compared to software PWM channels. 
 
 The most important feature is they're ISR-based PWM channels. Therefore, their executions are **not blocked by bad-behaving functions / tasks**. This important feature is absolutely necessary for mission-critical tasks. 
 
