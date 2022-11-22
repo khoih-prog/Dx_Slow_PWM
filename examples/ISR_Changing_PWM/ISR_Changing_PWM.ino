@@ -5,7 +5,7 @@
 
   Built by Khoi Hoang https://github.com/khoih-prog/Dx_Slow_PWM
   Licensed under MIT license
-  
+
   Now even you use all these new 16 ISR-based timers,with their maximum interval practically unlimited (limited only by
   unsigned long miliseconds), you just consume only one AVRDx-based timer and avoid conflicting with other cores' tasks.
   The accuracy is nearly perfect compared to software timers. The most important feature is they're ISR-based timers
@@ -25,9 +25,9 @@
 // Don't define _PWM_LOGLEVEL_ > 0. Only for special ISR debugging only. Can hang the system.
 #define _PWM_LOGLEVEL_      1
 
-#if defined(__AVR_AVR128DA48__) 
+#if defined(__AVR_AVR128DA48__)
   #define SerialDebug   Serial1
-#elif defined(__AVR_AVR128DB48__) 
+#elif defined(__AVR_AVR128DB48__)
   #define SerialDebug   Serial3
 #else
   // standard Serial
@@ -64,7 +64,7 @@
 #elif USE_TIMER_4
   #define CurrentTimer   ITimer4
 #else
-  #error You must select one Timer  
+  #error You must select one Timer
 #endif
 
 #define USING_MICROS_RESOLUTION       true  //false 
@@ -81,9 +81,9 @@
   // To modify according to your board
   // For Curiosity Nano AVR128DA48 => PIN_PC6
   // For Curiosity Nano AVR128DB48 => PIN_PB3
-  #if defined(__AVR_AVR128DA48__) 
+  #if defined(__AVR_AVR128DA48__)
     #define LED_BUILTIN   PIN_PC6   // PIN_PB3, 13
-  #elif defined(__AVR_AVR128DB48__) 
+  #elif defined(__AVR_AVR128DB48__)
     #define LED_BUILTIN   PIN_PB3   // PIN_PC6, 13
   #else
     // standard Arduino pin 13
@@ -105,7 +105,7 @@ DX_SLOW_PWM_ISR ISR_PWM;
 //////////////////////////////////////////////////////
 
 void TimerHandler()
-{ 
+{
   ISR_PWM.run();
 }
 
@@ -119,9 +119,9 @@ void TimerHandler()
 uint32_t PWM_Pin    = LED_BUILTIN;
 
 // You can assign any interval for any timer here, in Hz
-float PWM_Freq1   = 1.0f;
+float PWM_Freq1   = 10.0f;
 // You can assign any interval for any timer here, in Hz
-float PWM_Freq2   = 2.0f;
+float PWM_Freq2   = 20.0f;
 
 // You can assign any interval for any timer here, in microseconds
 uint32_t PWM_Period1 = 1000000 / PWM_Freq1;
@@ -141,18 +141,23 @@ int channelNum;
 void setup()
 {
   SerialDebug.begin(115200);
+
   while (!SerialDebug && millis() < 5000);
 
-  SerialDebug.print(F("\nStarting ISR_Changing_PWM on ")); SerialDebug.println(BOARD_NAME);
+  SerialDebug.print(F("\nStarting ISR_Changing_PWM on "));
+  SerialDebug.println(BOARD_NAME);
   SerialDebug.println(DX_SLOW_PWM_VERSION);
-  SerialDebug.print(F("CPU Frequency = ")); SerialDebug.print(F_CPU / 1000000); SerialDebug.println(F(" MHz"));
-  SerialDebug.print(F("Max number PWM channels = ")); SerialDebug.println(MAX_NUMBER_CHANNELS);
+  SerialDebug.print(F("CPU Frequency = "));
+  SerialDebug.print(F_CPU / 1000000);
+  SerialDebug.println(F(" MHz"));
+  SerialDebug.print(F("Max number PWM channels = "));
+  SerialDebug.println(MAX_NUMBER_CHANNELS);
 
-  SerialDebug.print(F("TCB Clock Frequency = ")); 
+  SerialDebug.print(F("TCB Clock Frequency = "));
 
-#if USING_FULL_CLOCK  
+#if USING_FULL_CLOCK
   SerialDebug.println(F("Full clock (24/16MHz, etc) for highest accuracy"));
-#elif USING_HALF_CLOCK  
+#elif USING_HALF_CLOCK
   SerialDebug.println(F("Half clock (12/8MHz, etc.) for high accuracy"));
 #else
   SerialDebug.println(F("250KHz for lower accuracy but longer time"));
@@ -164,18 +169,20 @@ void setup()
 
   if (CurrentTimer.attachInterruptInterval(HW_TIMER_INTERVAL_MS, TimerHandler))
   {
-    SerialDebug.print(F("Starting  ITimer1 OK, micros() = ")); SerialDebug.println(micros());
+    SerialDebug.print(F("Starting  ITimer1 OK, micros() = "));
+    SerialDebug.println(micros());
   }
   else
     SerialDebug.println(F("Can't set CurrentTimer. Select another freq. or timer"));
-    
+
 #else
 
   CurrentTimer.init();
 
   if (CurrentTimer.attachInterrupt(HW_TIMER_INTERVAL_FREQ, TimerHandler))
   {
-    SerialDebug.print(F("Starting  ITimer1 OK, micros() = ")); SerialDebug.println(micros());
+    SerialDebug.print(F("Starting  ITimer1 OK, micros() = "));
+    SerialDebug.println(micros());
   }
   else
     SerialDebug.println(F("Can't set CurrentTimer. Select another freq. or timer"));
@@ -185,8 +192,10 @@ void setup()
 
 void loop()
 {
-  SerialDebug.print(F("Using PWM Freq = ")); SerialDebug.print(PWM_Freq1); 
-  SerialDebug.print(F(", PWM DutyCycle = ")); SerialDebug.println(PWM_DutyCycle1);
+  SerialDebug.print(F("Using PWM Freq = "));
+  SerialDebug.print(PWM_Freq1);
+  SerialDebug.print(F(", PWM DutyCycle = "));
+  SerialDebug.println(PWM_DutyCycle1);
 
 #if USING_PWM_FREQUENCY
 
@@ -207,7 +216,10 @@ void loop()
 
   ISR_PWM.deleteChannel((unsigned) channelNum);
 
-  SerialDebug.print(F("Using PWM Freq = ")); SerialDebug.print(PWM_Freq2); SerialDebug.print(F(", PWM DutyCycle = ")); SerialDebug.println(PWM_DutyCycle2);
+  SerialDebug.print(F("Using PWM Freq = "));
+  SerialDebug.print(PWM_Freq2);
+  SerialDebug.print(F(", PWM DutyCycle = "));
+  SerialDebug.println(PWM_DutyCycle2);
 
 #if USING_PWM_FREQUENCY
 

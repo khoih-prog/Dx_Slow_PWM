@@ -1,6 +1,6 @@
 /****************************************************************************************************************************
   multiFileProject.h
-  
+
   For Arduino AVRDx-based boards (AVR128Dx, AVR64Dx, AVR32Dx, etc.) using DxCore
   Written by Khoi Hoang
 
@@ -12,9 +12,9 @@
 
 #pragma once
 
-#if defined(__AVR_AVR128DA48__) 
+#if defined(__AVR_AVR128DA48__)
   #define SerialDebug   Serial1
-#elif defined(__AVR_AVR128DB48__) 
+#elif defined(__AVR_AVR128DB48__)
   #define SerialDebug   Serial3
 #else
   // standard Serial
