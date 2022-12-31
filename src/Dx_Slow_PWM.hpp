@@ -12,13 +12,14 @@
   Therefore, their executions are not blocked by bad-behaving functions / tasks.
   This important feature is absolutely necessary for mission-critical tasks.
 
-  Version: 1.0.2
+  Version: 1.1.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0   K.Hoang      25/08/2022 Initial coding to support AVR Dx (AVR128Dx, AVR64Dx, AVR32Dx, etc.) using DxCore
   1.0.1   K.Hoang      25/08/2022 Make MAX_NUMBER_CHANNELS configurable to max 64 PWM channels
   1.0.2   K.Hoang      25/08/2022 Minor cosmetic fix
+  1.1.0   K.Hoang      30/12/2022 Add support to AVR DD (AVR64DD, AVR32DDx, AVR16DD, etc.) using breaking DxCore v1.5.1+
 *****************************************************************************************************************************/
 
 #pragma once
@@ -54,13 +55,22 @@
     
     #elif ( defined(__AVR_AVR64DD32__) || defined(__AVR_AVR64DD28__) || defined(__AVR_AVR64DD20__) || defined(__AVR_AVR64DD14__) )
       #define BOARD_NAME      F("AVR64DD")
-      #error AVR64DD not supported yet by the DxCore
+      
+      #if ( (DXCORE_MAJOR == 1) && (DXCORE_MINOR < 5) )
+        #error AVR64DD not supported yet
+      #endif
     #elif ( defined(__AVR_AVR32DD32__) || defined(__AVR_AVR32DD28__) || defined(__AVR_AVR32DD20__) || defined(__AVR_AVR32DD14__) )
       #define BOARD_NAME      F("AVR32DD")
-      #error AVR32DD not supported yet by the DxCore
+      
+      #if ( (DXCORE_MAJOR == 1) && (DXCORE_MINOR < 5) )
+        #error AVR32DD not supported yet
+      #endif
     #elif ( defined(__AVR_AVR16DD32__) || defined(__AVR_AVR16DD28__) || defined(__AVR_AVR16DD20__) || defined(__AVR_AVR16DD14__) )
       #define BOARD_NAME      F("AVR16DD")
-      #error AVR16DD not supported yet by the DxCore
+      
+      #if ( (DXCORE_MAJOR == 1) && (DXCORE_MINOR < 5) )
+        #error AVR16DD not supported yet
+      #endif
     
     ////////////////////////// __AVR_DU__ //////////////////////////
     
@@ -87,31 +97,23 @@
     #endif
     
   #endif  // #if !defined(BOARD_NAME)
-       
-#elif defined(MEGATINYCORE)
-      
-  #define TIMER_INTERRUPT_USING_MEGATINYCORE       true  
-  
-  #define BOARD_NAME      F("MEGATINYCORE Board") 
-  
-  #error Support for megaTinyCore not ready yet! Please check your Tools->Board setting 
-      
+            
 #else
  
-  #error This is designed only for AVRDx boards using DxCore or megaTinyCore ! Please check your Tools->Board setting
+  #error This is designed only for AVRDx boards using DxCore ! Please check your Tools->Board setting
 
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef DX_SLOW_PWM_VERSION
-  #define DX_SLOW_PWM_VERSION           F("Dx_Slow_PWM v1.0.2")
+  #define DX_SLOW_PWM_VERSION           F("Dx_Slow_PWM v1.1.0")
   
   #define DX_SLOW_PWM_VERSION_MAJOR     1
-  #define DX_SLOW_PWM_VERSION_MINOR     0
-  #define DX_SLOW_PWM_VERSION_PATCH     2
+  #define DX_SLOW_PWM_VERSION_MINOR     1
+  #define DX_SLOW_PWM_VERSION_PATCH     0
 
-  #define DX_SLOW_PWM_VERSION_INT       1000002
+  #define DX_SLOW_PWM_VERSION_INT       1001000
 #endif
 
 #ifndef _PWM_LOGLEVEL_

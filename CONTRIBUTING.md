@@ -15,7 +15,7 @@ If you don't find anything, please [open a new issue](https://github.com/khoih-p
 Please ensure to specify the following:
 
 * Arduino IDE version (e.g. 1.8.19) or Platform.io version
-* `DxCore` or `megaTinyCore` Core Version (e.g. Arduino DxCore core v1.4.10)
+* `DxCore` Core Version (e.g. Arduino DxCore core v1.5.1)
 * Board (e.g. AVR128DA64, AVR128DB48, AVR64DB32, etc.)
 * Contextual information (e.g. what you were trying to achieve)
 * Simplest possible steps to reproduce
@@ -23,15 +23,15 @@ Please ensure to specify the following:
   * Operating system (Windows, Ubuntu, etc.) and the output of `uname -a`
   * Network configuration
 
+Please be educated, civilized and constructive. Disrespective posts against [GitHub Code of Conduct](https://docs.github.com/en/site-policy/github-terms/github-event-code-of-conduct) will be ignored and deleted.
 
 ### Example
 
 ```
 Arduino IDE version: 1.8.19
-Arduino DxCore core v1.4.10
-OS: Ubuntu 20.04 LTS
+Arduino DxCore core v1.5.1
 Board: Curiosity AVR128DB48
-Linux xy-Inspiron-3593 5.15.0-53-generic #59~20.04.1-Ubuntu SMP Thu Oct 20 15:10:22 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+Linux xy-Inspiron-3593 5.15.0-56-generic #62~20.04.1-Ubuntu SMP Tue Nov 22 21:24:20 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
 
 Context:
 I encountered a crash while using this library

@@ -10,13 +10,14 @@
 <a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Donate to my libraries using BuyMeACoffee" style="height: 50px !important;width: 181px !important;" ></a>
 <a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg?logo=buy-me-a-coffee&logoColor=FFDD00" style="height: 20px !important;width: 200px !important;" ></a>
 
+
 ---
 ---
 
 ## Table of Contents
 
 * [Changelog](#changelog)
-
+  * [Release v1.1.0](#release-v110)
   * [Release v1.0.2](#release-v102)
   * [Release v1.0.1](#release-v101)
   * [Initial Release v1.0.0](#initial-release-v100)
@@ -26,6 +27,9 @@
 
 ## Changelog
 
+### Release v1.1.0
+
+1. Add support to AVRDD (AVR64DD, AVR32DD, AVR16DD, etc.)
 
 ### Release v1.0.2
 
