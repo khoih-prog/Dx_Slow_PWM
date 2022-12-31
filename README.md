@@ -176,16 +176,8 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
     <img src="https://github.com/khoih-prog/Dx_TimerInterrupt/raw/main/pics/Curiosity_AVR128DB48.png">
 </p>
 
+- **AVRDD-based boards (AVR64DB, AVR32DB, AVR16DB, etc.) using DxCore v1.5.1+**
 
-### To be supported Boards
-
-- **AVRDD-based boards (AVR64DD) using DxCore**
-
-- **tinyAVR boards using megaTinyCore**
-
-<p align="center">
-    <img src="https://github.com/khoih-prog/Dx_TimerInterrupt/raw/main/pics/Curiosity_ATtiny3217.png">
-</p>
 
 ---
 ---
@@ -205,7 +197,7 @@ The catch is **your function is now part of an ISR (Interrupt Service Routine), 
 ## Prerequisites
 
 1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
-2. [`SpenceKonde DxCore core 1.4.10+`](https://github.com/SpenceKonde/DxCore) for Arduino AVRDx boards.  [![GitHub release](https://img.shields.io/github/release/SpenceKonde/DxCore.svg)](https://github.com/SpenceKonde/DxCore/releases/latest). Follow [**DxCore Installation**](https://github.com/SpenceKonde/DxCore/blob/main/Installation.md).
+2. [`SpenceKonde DxCore core 1.5.1+`](https://github.com/SpenceKonde/DxCore) for Arduino AVRDx boards.  [![GitHub release](https://img.shields.io/github/release/SpenceKonde/DxCore.svg)](https://github.com/SpenceKonde/DxCore/releases/latest). Follow [**DxCore Installation**](https://github.com/SpenceKonde/DxCore/blob/main/Installation.md).
 3. To use with certain example
    - [`SimpleTimer library`](https://github.com/jfturcot/SimpleTimer) for [ISR_8_PWMs_Array_Simple](examples/ISR_8_PWMs_Array_Simple) and [ISR_8_PWMs_Array_Complex](examples/ISR_8_PWMs_Array_Complex) examples.
    
@@ -375,7 +367,7 @@ void setup()
 
 ### Example [ISR_8_PWMs_Array_Complex](examples/ISR_8_PWMs_Array_Complex)
 
-https://github.com/khoih-prog/Dx_Slow_PWM/blob/a4f6824724484cd522fc9c98fac4cd5c6a373ee4/examples/ISR_8_PWMs_Array_Complex/ISR_8_PWMs_Array_Complex.ino#L16-L512
+https://github.com/khoih-prog/Dx_Slow_PWM/blob/4cf1091eb1cae2942a24b952241669a7e2d40e1f/examples/ISR_8_PWMs_Array_Complex/ISR_8_PWMs_Array_Complex.ino#L16-L529
 
 
 ---
@@ -390,7 +382,7 @@ The following is the sample terminal output when running example [ISR_8_PWMs_Arr
 
 ```cpp
 Starting ISR_8_PWMs_Array_Complex on AVR128DB
-Dx_Slow_PWM v1.0.2
+Dx_Slow_PWM v1.1.0
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 13691
@@ -432,7 +424,7 @@ The following is the sample terminal output when running example [**ISR_8_PWMs_A
 
 ```cpp
 Starting ISR_8_PWMs_Array on AVR128DB
-Dx_Slow_PWM v1.0.2
+Dx_Slow_PWM v1.1.0
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 12894
@@ -446,7 +438,7 @@ The following is the sample terminal output when running example [**ISR_8_PWMs_A
 
 ```cpp
 Starting ISR_8_PWMs_Array_Simple on AVR128DB
-Dx_Slow_PWM v1.0.2
+Dx_Slow_PWM v1.1.0
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 14169
@@ -460,7 +452,7 @@ The following is the sample terminal output when running example [ISR_Modify_PWM
 
 ```cpp
 Starting ISR_Modify_PWM on AVR128DB
-Dx_Slow_PWM v1.0.2
+Dx_Slow_PWM v1.1.0
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 12823
@@ -475,7 +467,7 @@ The following is the sample terminal output when running example [ISR_Changing_P
 
 ```cpp
 Starting ISR_Changing_PWM on AVR128DB
-Dx_Slow_PWM v1.0.2
+Dx_Slow_PWM v1.1.0
 CPU Frequency = 24 MHz
 TCB Clock Frequency = Full clock (24/16MHz, etc) for highest accuracy
 Starting  ITimer1 OK, micros() = 12998
@@ -520,8 +512,7 @@ Submit issues to: [Dx_Slow_PWM issues](https://github.com/khoih-prog/Dx_Slow_PWM
 ## TO DO
 
 1. Search for bug and improvement
-2. Add support to **AVRDD-based boards (AVR64DD)** using [DxCore](https://github.com/SpenceKonde/DxCore)
-3. Add support to **tinyAVRDD-based boards** using [megaTinyCore](https://github.com/SpenceKonde/megaTinyCore)
+
 
 ---
 
@@ -538,7 +529,8 @@ Submit issues to: [Dx_Slow_PWM issues](https://github.com/khoih-prog/Dx_Slow_PWM
  9 Make `MAX_NUMBER_CHANNELS` configurable to max **64 PWM channels**
 10. Remove debug codes possibly causing hang
 11. Improve debug to use `Serialx` port automatically according to boards.
-
+12. Add support to AVRDD (AVR64DD, AVR32DD, AVR16DD, etc.)
+13. Modify to use either breaking DxCore v1.5.1+ or v1.4.10-
 
 ---
 ---
